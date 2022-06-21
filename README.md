@@ -23,23 +23,33 @@
 
 
 ### 인원 및 역할
-- 총원 4명 
-- 역할 : 영화 정보 크롤링, 웹 페이지 구현
+- 총원 5명 
+- 역할 : 네이버 뉴스 크롤링, 뉴스 데이터 파이프라인 구축, 웹 서버 구축
 
 ### 상세 역할
-**< part (1) : 영화 정보 크롤링 >**    
-- beautifulsoup4 활용 영화 제목, 감독, 개봉정보, 줄거리 등 10개 정보 크롤링(2011~2019)
-- 크롤링 한 데이터 csv 형태로 Django 자체 db에 저장  
+**< part (1) : 네이버 뉴스 크롤링 >**  
+   - beautifulsoup4 사용 네이버 뉴스(정치,경제,스포츠,연예,사회,생활/문화)기사 및 뉴스 분야, 기사 url, 언론등 7개 데이터 크롤링
+   - 크롤링 한 뉴스 기사 원문 데이터 KoBART로 모델링 후 요약문 생성 
+   - 크롤링한 데이터 + 요약문 RDS에 적재
+   -   
+**< part (2) : Raspberry Pi4 ↔ API 서버 연동 및 스피커 서비스 구현 >**
+   - FastAPI에서 뉴스 주제, 키워드 검색시 요약문을 반환하는 api 생성
+   - Raspberry Pi4에서 만들어진 api 호출 후 response된 요약문 tts로 출력하는 함수 생성  
+   - 
+**< part (3) : 웹 서버 생성 및 배포 >**
+   - EC2 생성 후 서버 환경 구축
+   - FastAPI로 만든 웹페이지 및 API AWS route53으로 도메인 등록 후 nginx로 배포
 
-**< part (2) : 웹 페이지 구현 >**  
-- django 활용 키워드 검색 추천 웹 페이지 구현  
+# 프로젝트 결과
 
-## 프로젝트 결과
-
+## NewsSum 시연 영상
 [![mv](https://img.youtube.com/vi/AfWimVqh24s/hqdefault.jpg)](https://www.youtube.com/watch?v=AfWimVqh24s)
+[![web](https://img.youtube.com/vi/gvhjLhK6EMc/hqdefault.jpg)](https://www.youtube.com/watch?v=gvhjLhK6EMc)
+## AI-Speaker 시연 영상
 
 
 ### 개선 사항
-- 검색시 속도 문제 해결 필요
-- 웹 서버 배포를 통해 홈페이지 구현
-- 키워드 기반 추천 방식 외에 다른 추천 시스템 방식 도입 
+- T5 모델 사용시 주어가 생략되는 문제 해결 필요
+- 시간, 날짜 단위 뉴스 출력 서비스 구현
+- KoEletra와 같은 다른 요약 모델 성능 측정 및 모델링 구현 필요
+- 영문 뉴스 번역 서비스로 확장 필요ㅕ 
