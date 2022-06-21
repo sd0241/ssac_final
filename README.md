@@ -42,7 +42,7 @@
 
 # 프로젝트 결과
 
-## AI-Speaker & NewsSum 시연 영상
+## AI-Speaker & NewsSum 시연 영상 (썸네일 Click!)
 [![mv](https://img.youtube.com/vi/i5SYENVIA4M/hqdefault.jpg)](https://www.youtube.com/watch?v=i5SYENVIA4M)
 [![web](https://img.youtube.com/vi/gvhjLhK6EMc/hqdefault.jpg)](https://www.youtube.com/watch?v=gvhjLhK6EMc)
 
