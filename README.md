@@ -22,6 +22,8 @@
  ![image](./test_code1/stack.png)
 
 
+### System Architecture
+
 ### 인원 및 역할
 - 총원 5명 
 - 역할 : 네이버 뉴스 크롤링, API 연동, 웹 서버 배포
