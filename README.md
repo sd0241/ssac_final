@@ -17,12 +17,15 @@
 6. 요약 뉴스 TTS 출력 
 7. HTML & CSS 활용 FastAPI 웹 페이지 구현
  
- ### 사용 기술 stack
+### 사용 기술 stack
  
  ![image](./test_code1/stack.png)
 
 
-### System Architecture
+### System Architecture  
+
+![image](./test_code1/arc.png)  
+
 
 ### 인원 및 역할
 - 총원 5명 
