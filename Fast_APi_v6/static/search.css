@@ -1,0 +1,40 @@
+body {
+    background: #eae7de;
+    letter-spacing: -.0125rem;
+}
+
+.search input {
+    padding-left: 56px;
+    height: 52px;
+    font-size: 1.125rem;
+}
+
+input[type=search] {
+    -webkit-appearance: textfield;
+}
+
+.textfield-input {
+    display: block;
+    width: 100%;
+    padding: 10px 40px 11px 1.5rem;
+    border: 1px solid #051619;
+    border-radius: 0;
+    box-sizing: border-box;
+    box-shadow: 0;
+    font: inherit;
+    color: #051619;
+    transition: all .2s;
+    outline: none;
+    box-shadow: none;
+}
+
+.icon-arrow {
+    position: relative;
+}
+button>* {
+    pointer-events: none;
+}
+button:not(:active), button:not(:focus) {
+    outline: 0;
+}
+

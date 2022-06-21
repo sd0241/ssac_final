@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" content="width=device-width">
+    <title>테마별 뉴스</title>
+    <link href="/static/style.css" rel="stylesheet" type="text/css"/>
+    <script src="/static/script.js"></script>
+</head>
+<body>
+    <div style="padding:10px;">
+        <a href="/">🏠HOME</a>
+    </div>
+  <div>
+
+      <div class="navbar-inner">
+        <div class="navbar-menu" role="navigation"></div>
+        <a class="navbar-logo"  href="/">
+          <img src="/static/media/newssum_logo3.png" alt="뉴스썸 NEWSSUM">
+        </a>
+      </div>
+
+    <section class="post">
+      <div class="post-scrollwrap">
+        <header class = "post-head">
+          <span class = "post-head-runninghead" ><b>{{topic}}</b></span>
+          <div class="post-head-progress" role="progressbar" aria-valuenow="" style="width: 0%;"></div>
+        </header>
+
+
+
+    <div class="post-container">
+        <h1 style="padding:10px class = "post-head-headline"><b>{{title_3}}</b></h1>
+    <time class = "post-head-date"><b>{{time_3}}</b></time>
+      <p>
+
+      </p>
+
+      <div class = "post-body">
+        <span><strong>언론사</strong></span> :
+        <span>{{media_3}}</span>
+
+        <p>
+        <span><strong>요약 기사</strong></span> :
+        <span>{{abs_news_3}}</span>
+        </p>
+        <p style="border-bottom: 1px solid #051619;">
+            <span><strong><a href="{{url_3}}}"><b>기사 보기</b></a></strong></span>
+<!--         <span><strong>기사 원문</strong></span>-->
+<!--        <span >{{news_3}}</span>-->
+        </p>
+
+          <h1 style="padding:10px class = "post-head-headline"><b>{{title_2}}</b></h1>
+    <time class = "post-head-date"><b>{{time_2}}</b></time>
+      <p>
+
+      </p>
+
+      </div>
+      <div class = "post-body">
+        <span><strong>언론사</strong></span> :
+        <span>{{media_2}}</span>
+
+        <p>
+        <span><strong>요약 기사</strong></span> :
+        <span>{{abs_news_2}}</span>
+        </p>
+        <p style="border-bottom: 1px solid #051619;">
+            <span><strong><a href="{{url_2}}"><b>기사 보기</b></a></strong></span>
+<!--         <span><strong>기사 원문</strong></span> :-->
+<!--        <span >{{news_2}}</span>-->
+        </p>
+      </div>
+
+        <h1 style="padding:10px class = "post-head-headline"><b>{{title_1}}</b></h1>
+    <time class = "post-head-date"><b>{{time_1}}</b></time>
+      <p>
+
+      </p>
+
+      <div class = "post-body">
+        <span><strong>언론사</strong></span> :
+        <span>{{media_1}}</span>
+
+        <p>
+        <span><strong>요약 기사</strong></span> :
+        <span>{{abs_news_1}}</span>
+        </p>
+        <p style="border-bottom: 1px solid #051619;">
+            <span><strong><a href="{{url_1}}"><b>기사 보기</b></a></strong></span>
+<!--         <span><strong>기사 원문</strong></span> :-->
+<!--        <span >{{news_1}}</span>-->
+        </p>
+      </div>
+
+    </div>
+
+    </div>
+
+
+</body>
+</html>

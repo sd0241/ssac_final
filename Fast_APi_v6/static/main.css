@@ -1,0 +1,196 @@
+.navbar-logo {
+    width: 600px;
+    text-align: center;
+}
+.navbar .navbar-inner {
+    padding-top: 3.5rem;
+    padding-bottom: 4rem;
+}
+.navbar .navbar-inner {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 3rem 5% 2.5rem;
+    width: 100%;
+    border: 0;
+}
+.navbar-menu {
+    display: block;
+    height: auto;
+    margin-left: 0;
+    padding: 12rem 0;
+    box-sizing: border-box;
+    background: #eae7de;
+    opacity: 0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 8;
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+}
+.navbar-user-search-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border: 1px solid #051619;
+    box-sizing: border-box;
+}
+.subscribe-newbear {
+    left: auto;
+    top: auto;
+    bottom: auto;
+    margin: -2rem auto auto;
+    position: relative;
+    max-width: 300px;
+    z-index: 6;
+}
+
+button:not(:active), button:not(:focus) {
+    outline: 0;
+}
+button {
+    padding: 0;
+    background: none;
+    cursor: pointer;
+    font: inherit;
+    position: relative;
+    text-rendering: auto;
+    color: buttontext;
+    Letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: normal;
+    text-indent: 0px;
+    text-shadow: none;
+    text-align: center;
+}
+.icon-search:before {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 0 auto;
+    border: 2px solid #051619;
+    transform: translateX(-1px);
+}
+.icon-search:after {
+    content: "";
+    display: block;
+    width: 6px;
+    height: 2px;
+    background: #051619;
+    margin: 0 auto;
+    transform: rotate(45deg) translate(3px,-5px);
+}
+img {
+    vertical-align: middle;
+}
+a, abbr {
+    text-decoration: none;
+}
+body {
+    background: #eae7de;
+    letter-spacing: -.0125rem;
+}
+.intro-head-description {
+    padding: 2rem 0 4rem;
+    background: #ffbe76;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 6;
+}
+html {
+    min-width: 320px;
+    height: 100%;
+    overflow-x: hidden;
+    font: 14px/1.8 "Noto Sans KR","Apple SD Gothic Neo",sans-serif;
+    color: #051619;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+.intro-head-title {
+    background: #eae7de;
+    border-top: 1px solid #051619;
+    margin-top: -10rem;
+    font-size: 2rem;
+    text-align: center;
+    position: relative;
+    z-index: 6;
+}
+.intro-head-title {
+    padding: 1rem 0;
+    border-top: 1px solid #051619;
+    border-bottom: 1px solid #051619;
+    letter-spacing: -.025rem;
+}
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1.4;
+    word-break: keep-all;
+}
+h1 {
+    display: block;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.category {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    border-top: 1px solid #051619;
+    border-bottom: 1px solid #051619;
+    background: #fff;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.category-inner {
+    display: flex;
+    white-space: nowrap;
+    overflow: overlay;
+}
+.category-backdrop {
+    height: 52px;
+}
+.category-link.is-active {
+    border-bottom: 3px solid #051619;
+}
+.category-link {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    margin: 0 1rem;
+    padding: 1.25rem 0;
+    box-sizing: border-box;
+    font-size: 1.125rem;
+    color: #051619;
+    cursor: pointer;
+}
+.card {
+    display: block;
+    width: 25%;
+    color: #051619;
+    border: 1px solid #051619;
+    border-width: 0 1px 1px 0;
+    cursor: pointer;
+}
+.card .card-body {
+    padding: 1.5rem 1.75rem;
+    box-sizing: border-box;
+}

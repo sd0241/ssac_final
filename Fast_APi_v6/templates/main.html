@@ -1,0 +1,302 @@
+
+<!DOCTYPE html><html lang="ko">
+  <head>
+    {% block scripts %}
+        <script>
+
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        var csrftoken = getCookie('csrftoken');
+
+        var xhr;
+
+        // Ajax로 등록
+        function postUser() {
+
+            var uname = document.getElementById('username_').value;
+            var uage = parseInt(document.getElementById('userage_').value);
+
+            var data = { id: 0, name: uname, age: uage };
+            var jsonstr = JSON.stringify(data);
+
+            //alert(jsonstr);
+            //return false;
+
+            xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4) {
+                    var data = xhr.responseText;
+                    var obj = JSON.parse(data);
+
+                    var node = document.createElement("DIV");
+                    var textnode = document.createTextNode(uname + " - " + uage + " added...");
+                    node.appendChild(textnode);
+                    document.getElementById("News").appendChild(node);
+
+                    //alert(obj.name + " registered...");
+                }
+            };
+            xhr.open("POST", "/users");
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            xhr.setRequestHeader("Content-Type","application/json");
+            xhr.send(jsonstr);
+        }
+
+        // Ajax로 수정
+        function putUser(elem) {
+
+            var userid = parseInt(elem.getAttribute('userid'));
+            var uname = document.getElementById('username_'+userid).value;
+            var uage = parseInt(document.getElementById('userage_'+userid).value);
+
+            var data = { id: userid, name: uname, age: uage }
+            var jsonstr = JSON.stringify(data);
+
+            //alert(jsonstr);
+            //return false;
+
+            xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4) {
+                    var data = xhr.responseText;
+                    var obj = JSON.parse(data);
+                    //alert(uname + " modified...");
+                    document.getElementById('username_'+userid).style.color = "#FF6600";
+                    document.getElementById('userage_'+userid).style.color = "#FF6600";
+                }
+            };
+            xhr.open("PUT", "/users");
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            xhr.setRequestHeader("Content-Type","application/json");
+            xhr.send(jsonstr);
+        }
+
+
+        // Ajax로 삭제
+        function deleteUser(userid) {
+
+            if (confirm("삭제 하시겠습니까?") == false) {
+                return false;
+            }
+
+            var data = { id: userid, name: '', age: 0 }
+            var jsonstr = JSON.stringify(data);
+
+            xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4) {
+                    var data = xhr.responseText;
+                    var obj = JSON.parse(data);
+
+                    document.getElementById('userbox_'+userid).remove();
+                    //alert(obj.result_msg);
+                }
+            };
+            xhr.open("DELETE", "/users");
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            xhr.setRequestHeader("Content-Type","application/json");
+            xhr.send(jsonstr);
+        }
+
+    </script>
+{% endblock %}
+    <script src="https://www.google-analytics.com/analytics.js" async></script>
+    <script src="https://www.googletagmanager.com/gtm.js?id=GTM-PG2SM3M&gtm_auth=&gtm_preview=&gtm_cookies_win=x" async></script>
+    <script src="https://www.googletagmanager.com/gtag/js?id=G-S2G5PE1GSD&l=dataLayer&cx=c" async type="text/javascript"></script>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];
+        w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js', });
+        var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+        j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl+'&gtm_auth=&gtm_preview=&gtm_cookies_win=x';
+        f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-PG2SM3M');
+
+
+        let getKeyword = document.getElementById('keyword').value;
+        console.log(getKeyword)
+
+</script>
+    <meta charset="utf-8"><meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover" name="viewport">
+    <link href="/assets/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"><link href="/assets/favicon-32x32.png" rel="icon" type="image/png" sizes="32x32">
+<!--    <link href="/assets/favicon-16x16.png" rel="icon" type="image/png" sizes="16x16"><link href="/assets/site.webmanifest" rel="manifest">-->
+    <link href="/assets/safari-pinned-tab.svg" rel="mask-icon" color="#ff6b00"><meta content="NEWNEEK" name="apple-mobile-web-app-title">
+    <meta content="NEWNEEK" name="application-name">
+    <meta content="#ffffff" name="msapplication-TileColor">
+    <meta content="#eae7de" name="theme-color">
+    <meta content="NEWNEEK" name="author">
+    <meta content="" name="keywords">
+    <meta content="NEWNEEK" name="copyright">
+    <meta content="website" property="og:type">
+    <meta content="ko_KR" property="og:locale">
+    <meta content="NEWNEEK" property="og:site_name">
+    <meta content="NEWNEEK" name="twitter:site">
+    <meta content="NEWNEEK" name="twitter:creator">
+    <meta content="ohmjslubj4fvy60ohc6w8p7cbnco1h" name="facebook-domain-verification">
+    <script src="https://www.googletagmanager.com/gtm.js?id=GTM-PG2SM3M" async></script>
+<!--    <script>!function(e,t,a,n,g){e[n]=e[n]||[],e[n].push({"gtm.start":(new Date).getTime(),event:"gtm.js"});var m=t.getElementsByTagName(a)[0],r=t.createElement(a);r.async=!0,r.src="https://www.googletagmanager.com/gtm.js?id=GTM-PG2SM3M",m.parentNode.insertBefore(r,m)}(window,document,"script","dataLayer")</script>-->
+<!--    <script>!function(t,h,e,j,s,n){t.hj=t.hj||function(){(t.hj.q=t.hj.q||[]).push(arguments)},t._hjSettings={hjid:1263925,hjsv:6},s=h.getElementsByTagName("head")[0],(n=h.createElement("script")).async=1,n.src="https://static.hotjar.com/c/hotjar-"+t._hjSettings.hjid+".js?sv="+t._hjSettings.hjsv,s.appendChild(n)}(window,document)</script>-->
+    <script src="https://static.hotjar.com/c/hotjar-1263925.js?sv=6" async></script><title>뉴스썸 NEWSSUM</title>
+    <link href="/static/css/main.1fecf71b.chunk.css?a" rel="stylesheet">
+    <link href="https://static.hotjar.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://www.googletagmanager.com" rel="preconnect">
+    <link href="/static/css/42.4055702f.chunk.css?a" rel="stylesheet" type="text/css">
+<!--      <script src="/static/js/42.ea20eb64.chunk.js" charset="utf-8"></script>-->
+<!--    <script src="/static/js/0.c2f4aefc.chunk.js" charset="utf-8"></script>-->
+    <link href="/static/css/8.91636b0c.chunk.css" rel="stylesheet" type="text/css">
+<!--      <script src="/static/js/8.a118666a.chunk.js" charset="utf-8"></script>-->
+    <link href="/static/css/33.236d59e8.chunk.css?a" rel="stylesheet" type="text/css">
+<!--      <script src="/static/js/33.0a99b76d.chunk.js" charset="utf-8"></script>-->
+    <link href="/static/css/45.af479bfb.chunk.css?a" rel="stylesheet" type="text/css">
+<!--      <script src="/static/js/45.791ce983.chunk.js" charset="utf-8"></script>-->
+    <meta content="뉴스썸 NEWSSUM" name="subject" data-react-helmet="true">
+    <meta content="놓치지 말아야 할 뉴스, 핵심만 알려줄게!" name="description" data-react-helmet="true">
+    <meta content="https://newneek.co/" data-react-helmet="true" property="og:url"><meta content="뉴스썸 NEWSSUM" data-react-helmet="true" property="og:title">
+    <meta content="놓치지 말아야 할 뉴스, 핵심만 알려줄게!" data-react-helmet="true" property="og:description">
+    <meta content="https://newneek.co/og.png" data-react-helmet="true" property="og:image">
+    <meta content="https://newneek.co/og.png" name="twitter:card" data-react-helmet="true">
+    <meta content="https://newneek.co/" name="twitter:url" data-react-helmet="true"><meta content="뉴스썸 NEWSSUM" name="twitter:title" data-react-helmet="true"><meta content="놓치지 말아야 할 뉴스, 핵심만 알려줄게!" name="twitter:description" data-react-helmet="true">
+    <style data-styled="active" data-styled-version="5.3.0">.jvCTkj{width:90%;max-width:1360px;margin-left:auto;margin-right:auto;padding:0 5%;position:relative}@media (max-width:1360px){.jvCTkj{max-width:1040px}}@media (max-width:820px){.jvCTkj{max-width:100%}}</style>
+    <link href="https://www.google-analytics.com" rel="preconnect">
+    <link href="https://api.newneek.co" rel="preconnect">
+    <link href="https://analytics.google.com" rel="preconnect">
+    <link href="https://www.google.co.kr" rel="preconnect">
+    <link href="https://stats.g.doubleclick.net" rel="preconnect"></head>
+  <body>
+    <noscript>
+      <iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-PG2SM3M&gtm_auth=&gtm_preview=&gtm_cookies_win=x" style="display:none;visibility:hidden" width="0" id="tag-manager"></iframe></noscript><noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"><nav class="navbar" role="navigation" style="">
+      <div class="navbar-inner">
+        <div class="navbar-menu" role="navigation"></div>
+        <a href="/" class="navbar-logo">
+          <img alt="뉴닉 NEWNEEK" src="/static/media/newssum_logo3.png"></a>
+        <div class="navbar-user">
+          <div class="navbar-user-search" role="search"></div>
+          </div></div></nav>
+      <header class="intro-head" style="">
+        <div class="subscribe-gosum">
+          <img alt="" src="/static/media/sessac_bear.png"></div>
+        <h1 class="intro-head-title"><div class="intro-inner">놓치지 말아야 할 뉴스,
+          <span class="mobile-block">핵심만 알려줄게!</span></div></h1>
+        <div class="intro-head-description">
+          <div class="intro-inner">
+            <p class="intro-head-subhead">🌱지금 새싹 수강생 <b>35명</b>이 <b>뉴스썸</b>을 읽고 있어요</p>
+            <p style="margin-top:1rem">세상 돌아가는 소식, 알고 싶지만 쉴 새 없이 바쁜 게 우리 탓은 아니잖아요!
+              <span class="desktop-block">월/화/수/목/금/토/일 아침마다 세상 돌아가는 소식을 핵심만 읽어보세요.</span></p>
+            <form class="subscribe">
+              <div class="textfield">
+                <input id='url' name="email" type="text" class="textfield-input" placeholder="URL을 입력해주세요" value=""></div>
+              <div class="textfield">
+                <input id="keyword" name="name" type="text" class="textfield-input" placeholder="키워드를 입력해주세요" value=""></div><div style="margin:.5rem 0 0"></div>
+              <button onclick="search();" class="subscribe-field-cta primary-button js-navbar-toggle">요약된 뉴스 검색하기</button>
+            </form>
+          </div>
+        </div>
+      </header>
+      <nav class="category"><div class="category-inner">
+        <a href="/" class="category-link is-active">전체</a>
+        <a href="/news/정치" class="category-link"><span><span role="img" aria-label="">⚖</span>정치</span></a>
+        <a href="/news/경제" class="category-link"><span><span role="img" aria-label="">💰</span>경제</span></a>
+        <a href="/news/사회" class="category-link"><span><span role="img" aria-label="">🧘</span>사회</span></a>
+        <a href="/news/문화" class="category-link"><span><span role="img" aria-label="">🥐</span>문화</span></a>
+        <a href="/news/스포츠" class="category-link"><span><span role="img" aria-label="">⚽</span>스포츠</span></a>
+        <a href="/news/연예" class="category-link"><span><span role="img" aria-label="">🎪</span>연예</span></a>
+
+     </div></nav>
+
+
+      <div class="category-backdrop"></div><section class="sc-bdnxRM jvCTkj home-recent" style="">
+
+        <div class="posts">
+        {% if news %}
+          {% for new in news[-20:] %}
+
+          <a href="/{{new.url[-15:]}}" class="card noimage"><div class="card-inner">
+              {%if new.topic == '정치' %}
+                <div class="card-body"><span role="img" class="card-emoji">⚖</span>
+              {%elif new.topic == '경제' %}
+                <div class="card-body"><span role="img" class="card-emoji">💰</span>
+              {%elif new.topic == '사회' %}
+                <div class="card-body"><span role="img" class="card-emoji">🧘</span>
+              {%elif new.topic == '문화' %}
+                <div class="card-body"><span role="img" class="card-emoji">🥐</span>
+              {%elif new.topic == '스포츠' %}
+               <div class="card-body"><span role="img" class="card-emoji">⚽</span>
+              {% else %}
+                <div class="card-body"><span role="img" class="card-emoji">🎪</span>
+              {% endif %}
+          <h3 class="card-title">{{new.title}}</h3>
+          <p class="card-text">{{new.news}}</p>
+          <time class="card-date">{{new.time}}</time>
+          <i class="card-category">{{new.topic}}</i>
+
+
+            </div></div></a>
+
+
+           {% endfor %}
+        {% else %}
+
+        {% endif %}
+
+   </div>
+        <nav class="posts-pagination">
+         </nav></section>
+      <a href="https://www.instagram.com/slx_saltlux/" class="home-banner" rel="noopener noreferrer" target="_blank" style="">
+        <figure class="home-banner-image"><img alt="" src="/static/media/sessac_bear2.png"></figure>
+     </a>
+      <footer class="footer" role="contentinfo">
+        <div class="footer-address"><a href="/" class="footer-address-logo">
+          <img alt="뉴스썸 NEWSSUM" src="/static/media/newssum_logo3.png"></a></div>
+      <small class="footer-copyright">ⓒ NEWSSUM Co., Ltd. 2022-2022.</small>
+
+
+
+
+       </body></html>
+
+
+
+<script>
+<!--    function search(){-->
+<!--        let keyword = document.getElementById('keyword').value;-->
+<!--        console.log(`http://52.11.68.7/news/?word=${keyword} 키워드`);-->
+<!--&lt;!&ndash;    현재페이지에서 주소 이동만    &ndash;&gt;-->
+<!--&lt;!&ndash;        window.location.href = `https://www.newssum.shop/news/?word=${keyword} 키워드`;&ndash;&gt;-->
+
+<!--&lt;!&ndash;   새창으로 열기     &ndash;&gt;-->
+<!--        -->
+<!--    }-->
+</script>
+
+<script>
+    function search(){
+        let keyword = ''
+        if(document.getElementById('url').value.length > 0 || document.getElementById('url').value != ''){
+            keyword = encodeURI(document.getElementById('url').value);
+            console.log('url : ',keyword);
+            window.open(`https://www.newssum.shop/url/?url=${keyword}`);
+        }else if(document.getElementById('keyword').value.length > 0 || document.getElementById('keyword').value.length != ''){
+            keyword = document.getElementById('keyword').value;
+            window.open(`https://www.newssum.shop/news/?word=${keyword} 키워드`);
+        }
+<!--        console.log(keyword)-->
+<!--        console.log(`https://www.newssum.shop/url/?url=${keyword}`);-->
+<!--    현재페이지에서 주소 이동만    -->
+<!--        window.location.href = `https://newssum.shop/url/?url=${url} 키워드`;-->
+
+<!--   새창으로 열기     -->
+    }
+</script>

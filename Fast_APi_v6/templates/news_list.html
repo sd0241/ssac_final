@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>News list</title>
+
+    {% block scripts %}
+        <script>
+
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        var csrftoken = getCookie('csrftoken');
+
+        var xhr;
+
+        // Ajax로 등록
+        function postUser() {
+
+            var uname = document.getElementById('username_').value;
+            var uage = parseInt(document.getElementById('userage_').value);
+
+            var data = { id: 0, name: uname, age: uage };
+            var jsonstr = JSON.stringify(data);
+
+            //alert(jsonstr);
+            //return false;
+
+            xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4) {
+                    var data = xhr.responseText;
+                    var obj = JSON.parse(data);
+
+                    var node = document.createElement("DIV");
+                    var textnode = document.createTextNode(uname + " - " + uage + " added...");
+                    node.appendChild(textnode);
+                    document.getElementById("News").appendChild(node);
+
+                    //alert(obj.name + " registered...");
+                }
+            };
+            xhr.open("POST", "/users");
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            xhr.setRequestHeader("Content-Type","application/json");
+            xhr.send(jsonstr);
+        }
+
+        // Ajax로 수정
+        function putUser(elem) {
+
+            var userid = parseInt(elem.getAttribute('userid'));
+            var uname = document.getElementById('username_'+userid).value;
+            var uage = parseInt(document.getElementById('userage_'+userid).value);
+
+            var data = { id: userid, name: uname, age: uage }
+            var jsonstr = JSON.stringify(data);
+
+            //alert(jsonstr);
+            //return false;
+
+            xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4) {
+                    var data = xhr.responseText;
+                    var obj = JSON.parse(data);
+                    //alert(uname + " modified...");
+                    document.getElementById('username_'+userid).style.color = "#FF6600";
+                    document.getElementById('userage_'+userid).style.color = "#FF6600";
+                }
+            };
+            xhr.open("PUT", "/users");
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            xhr.setRequestHeader("Content-Type","application/json");
+            xhr.send(jsonstr);
+        }
+
+
+        // Ajax로 삭제
+        function deleteUser(userid) {
+
+            if (confirm("삭제 하시겠습니까?") == false) {
+                return false;
+            }
+
+            var data = { id: userid, name: '', age: 0 }
+            var jsonstr = JSON.stringify(data);
+
+            xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4) {
+                    var data = xhr.responseText;
+                    var obj = JSON.parse(data);
+
+                    document.getElementById('userbox_'+userid).remove();
+                    //alert(obj.result_msg);
+                }
+            };
+            xhr.open("DELETE", "/users");
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            xhr.setRequestHeader("Content-Type","application/json");
+            xhr.send(jsonstr);
+        }
+
+    </script>
+{% endblock %}
+</head>
+<body>
+
+    <div style="padding:10px;">
+        <a href="/">HOME</a>
+    </div>
+
+    <h1 style="padding:10px;">News list</h1>
+    <div style="margin:20px 0">
+        <a href="/news/정치"><button>정치</button></a>
+        <a href="/news/경제"><button>경제</button></a>
+        <a href="/news/사회"><button>사회</button></a>
+        <a href="/news/문화"><button>문화</button></a>
+        <a href="/news/스포츠"><button>스포츠</button></a>
+        <a href="/news/연예"><button>연예</button></a>
+    </div>
+    <div  id="News">
+    <table width="100%" border="1" cellpadding="0" cellspacing="0">
+    {% if news %}
+        {% for new in news %}
+        <tr style="padding:10px;height:45px;" id="{{new.id}}">
+            <td align="center">{{new.time}}</td>
+            <td align="center">{{new.topic}}</td>
+            <td align="center">{{new.media}}</td>
+            <td align="center">{{new.title}}</td>
+            <td align="center">{{new.news}}</td>
+            <td align="center">{{new.abs_news}}</td>
+        </tr>
+        {% endfor %}
+    {% else %}
+        <tr style="padding:10px;border-top:solid 1px #3388cc;">
+            <td>
+            No user...
+            </td>
+        </tr>
+    {% endif %}
+    </table>
+    </div>
+
+</body>
+</html>
